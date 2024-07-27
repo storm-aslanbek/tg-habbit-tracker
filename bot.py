@@ -42,4 +42,3 @@ async def gender_form(callback: CallbackQuery, state: FSMContext):
         await state.update_data(gender='женский')
         await callback.message.answer('Ваш пол женский')
 
-dd

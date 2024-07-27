@@ -17,4 +17,3 @@ gender_main = InlineKeyboardMarkup(row_width = 2, inline_keyboard=[
 ])
 
 
-dddd
