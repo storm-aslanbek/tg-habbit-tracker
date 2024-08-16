@@ -25,6 +25,7 @@ class FormStates(StatesGroup):
 async def start_message(message: Message, state: FSMContext):
     await state.set_state(FormStates._id)
     await state.update_data(_id=message.from_user.id)
+
     await state.set_state(FormStates.name)
     await message.answer('Здравствуйте! Ваше имя?')
 
@@ -56,7 +57,15 @@ async def gender_form(callback: CallbackQuery, state: FSMContext):
 
     await state.clear()
 
+@router.message(F.text == 'Задания')
+async def add_task(message: Message):
+    await message.reply('Выберите тип задания', reply_markup=kb.task_types)
 
-@router.message(F.text)
-async def unfamiliar_text(message: Message):
-    await message.reply('Я вас не понимаю')
+
+@router.message(F.text == 'В главное')
+async def cancel(message: Message):
+    await message.answer('Выберите действие', reply_markup=kb.move_main)
+
+# @router.message(F.text)
+# async def unfamiliar_text(message: Message):
+#     await message.reply('Я вас не понимаю')
